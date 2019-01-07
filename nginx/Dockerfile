@@ -3,6 +3,7 @@ MAINTAINER reber <1070018473@qq.com>
 
 COPY ./src /data
 WORKDIR /data
+RUN chmod +x init.sh
 RUN cp sources.list /etc/apt/sources.list && apt-get update
 RUN tar -zxvf nginx-1.9.9.tar.gz && mv nginx-1.9.9 /opt
 RUN rm -rf /data
@@ -13,4 +14,5 @@ RUN ./configure && make && make install
 
 WORKDIR /usr/local/nginx/html
 
-ENTRYPOINT ["tail","-f","/dev/null"]
+CMD ["/data/init.sh"]
+#ENTRYPOINT ["tail","-f","/dev/null"]
