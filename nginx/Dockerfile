@@ -6,7 +6,6 @@ WORKDIR /data
 RUN chmod +x init.sh
 RUN cp sources.list /etc/apt/sources.list && apt-get update
 RUN tar -zxvf nginx-1.9.9.tar.gz && mv nginx-1.9.9 /opt
-RUN rm -rf /data
 
 RUN apt-get install -y libpcre3 libpcre3-dev zlib1g-dev libssl-dev build-essential
 WORKDIR /opt/nginx-1.9.9
