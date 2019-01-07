@@ -7,7 +7,7 @@ services:
     ports:
       - "81:80"
     volumes:
-      - ./www:/var/www/html
+      - ./web:/var/www/html
     links:
       - mysql
     environment: #设置环境变量
