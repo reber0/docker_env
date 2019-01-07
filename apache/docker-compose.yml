@@ -1,25 +1,28 @@
 version: '3'
 services:
   apache:
-    image: ubuntu:apache
-    container_name: apache
-    build: .
+    image: ubuntu:apache #镜像名为ubuntu，tag为apache
+    container_name: apache #运行后生成的容器名字为apache
+    build: . #使用当前路径下的Dockerfile构造镜像
     ports:
       - "81:80"
     volumes:
-      - ./web:/var/www/html
+      - ./www:/var/www/html
     links:
       - mysql
-    environment:
+    environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
-    restart: always
+    mem_limit: 1024m #最大内存使用不超过1024m
+    restart: always #容器重启策略：当容器终止退出后，总是重启容器，默认策略。
   mysql:
-    image: mysql:5.5
+    image: mysql:5.5 #拉取mysql:5.5
     container_name: mysql
     ports:
       - "3307:3306"
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./conf/my.cnf:/etc/mysql/my.cnf
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root #mysql密码为root
       - TZ=Asia/Shanghai
+    mem_limit: 1024m
