@@ -10,7 +10,6 @@ RUN tar -zxvf apache-tomcat-8.0.53.tar.gz && mv apache-tomcat-8.0.53 /opt
 RUN mv ojdbc6.jar /opt/apache-tomcat-8.0.53/lib
 
 RUN rm -rf sources.list
-RUN rm -rf jdk-8u181-linux-x64.tar.gz
 RUN rm -rf apache-tomcat-8.0.53.tar.gz
 
 WORKDIR /opt/apache-tomcat-8.0.53/webapps/ROOT
