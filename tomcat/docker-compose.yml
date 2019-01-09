@@ -14,13 +14,13 @@ services:
     environment:
       - TZ=Asia/Shanghai #设定时区
   oracle:
-    image: alexeiled/docker-oracle-xe-11g
+    image: sath89/oracle-xe-11g
     container_name: oracle
     ports:
       - "1521:1521"
       - "8080:8080"
     volumes:
-      - ./src/sql.sql:/etc/entrypoint-initdb.d/sql.sql
+      - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     working_dir: /u01/app/oracle
     restart: always
     environment:
