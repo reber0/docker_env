@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.4
+FROM ubuntu:14.04
 MAINTAINER reber <1070018473@qq.com>
 
 COPY ./src /data
