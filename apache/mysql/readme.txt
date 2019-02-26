@@ -1,1 +1,1 @@
-数据库文件
+database file
