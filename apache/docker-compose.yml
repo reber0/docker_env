@@ -12,7 +12,7 @@ services:
       - mysql
     environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
-    restart: always #容器重启策略：当容器终止退出后，总是重启容器，默认策略。
+    restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
   mysql:
     image: mysql:5.5 #拉取mysql:5.5
     container_name: mysql
@@ -21,6 +21,7 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
       - ./conf/my.cnf:/etc/mysql/my.cnf
+      - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     environment:
       - MYSQL_ROOT_PASSWORD=root #mysql密码为root
       - TZ=Asia/Shanghai
