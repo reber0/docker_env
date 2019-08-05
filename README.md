@@ -18,3 +18,5 @@ tomcat端口：8888
 oracle服务端口：1521
 
 oracle的web端口：8080
+
+sid:xe username:system password:123456
