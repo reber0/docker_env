@@ -5,7 +5,7 @@ apache端口：81
 
 mysql端口：3307
 
-username:root password:root
+username:root  password:root
 
 ### nginx
 环境：nginx+php
@@ -21,4 +21,4 @@ oracle服务端口：1521
 
 oracle的web端口：8080
 
-sid:xe username:system password:oracle
+sid:xe  username:system  password:oracle
