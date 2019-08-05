@@ -19,4 +19,4 @@ oracle服务端口：1521
 
 oracle的web端口：8080
 
-sid:xe username:system password:123456
+sid:xe username:system password:oracle
