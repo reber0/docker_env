@@ -14,8 +14,8 @@ services:
     environment:
       - TZ=Asia/Shanghai #设定时区
   oracle:
-    image: sath89/oracle-xe-11g
-    container_name: oracle
+    image: jaspeen/oracle-xe-11g
+    container_name: oracle11g
     ports:
       - "1521:1521"
       - "8080:8080"
