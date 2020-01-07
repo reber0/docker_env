@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER reber <1070018473@qq.com>
+MAINTAINER reber <reber0ask@protonmail.com>
 
 COPY ./src /data
 WORKDIR /data
