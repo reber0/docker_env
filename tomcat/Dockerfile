@@ -4,6 +4,7 @@ MAINTAINER reber <reber0ask@protonmail.com>
 COPY ./src /data
 WORKDIR /data
 
+RUN apt-get update > /dev/null
 RUN tar -zxvf jdk-8u281-linux-x64.tar.gz > /dev/null && mv jdk1.8.0_281 /opt
 ENV JAVA_HOME /opt/jdk1.8.0_281
 ENV PATH $JAVA_HOME/bin:$PATH
