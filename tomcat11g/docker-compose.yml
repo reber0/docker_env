@@ -3,9 +3,8 @@ services:
   tomcat8.5:
     image: tomcat:8.5-jdk8-corretto
     container_name: tomcat8.5
-    build: .
     ports:
-      - "8888:8080"
+      - "83:8080"
     volumes:
       - ./src/ojdbc6.jar:/usr/local/tomcat/lib/ojdbc6.jar
       - ./web:/usr/local/tomcat/webapps/ROOT
@@ -18,8 +17,8 @@ services:
     image: wnameless/oracle-xe-11g-r2
     container_name: oracle11g
     ports:
-      - "1521:1521"
-      - "8080:8080"
+      - "1521:1521" #oracle 端口
+      - "84:8080" #oracle 管理页面端口
     volumes:
       - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     working_dir: /u01/app/oracle

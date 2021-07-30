@@ -1,11 +1,12 @@
 version: '3'
 services:
   nginx:
-    image: ubuntu:nginx
-    build: .
+    image: nginx:stable-alpine
+    container_name: nginx
     ports:
       - "82:80"
     volumes:
-      - ./web:/usr/local/nginx/html
-    environment:
+      - ./src/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web:/usr/share/nginx/html/
+    environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区

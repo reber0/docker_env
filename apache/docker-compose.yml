@@ -1,27 +1,39 @@
 version: '3'
 services:
-  apache:
-    image: ubuntu:apache #镜像名为ubuntu，tag为apache
-    container_name: apache #运行后生成的容器名字为apache
-    build: . #使用当前路径下的Dockerfile构造镜像
+  web:
+    image: httpd:2.4-alpine #拉取镜像名为 httpd，tag 为 2.4-alpine 的镜像
+    container_name: apache2 #运行后生成的容器名字为 apache2
     ports:
       - "81:80"
     volumes:
-      - ./web:/var/www/html
+      - ./src/httpd.conf:/usr/local/apache2/conf/httpd.conf
     links:
-      - mysql5.5
+      - mysql
+      - php
     environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
     restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
-  mysql5.5:
-    image: mysql:5.5 #拉取mysql:5.5
-    container_name: mysql
-    ports:
-      - "3307:3306"
+  mysql:
+    image: mysql:5.5 #拉取 mysql:5.5
+    container_name: mysql5.5
+    expose:
+      - "3306"
     volumes:
       - ./mysql:/var/lib/mysql
-      - ./conf/my.cnf:/etc/mysql/my.cnf
+      - ./src/my.cnf:/etc/mysql/my.cnf
       - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     environment:
-      - MYSQL_ROOT_PASSWORD=root #mysql密码为root
+      - MYSQL_ROOT_PASSWORD=root #mysql 密码为 root
       - TZ=Asia/Shanghai
+  php:
+    image: php:7.4.22-fpm-alpine #镜像名为 php，tag 为 7.4.22-fpm-alpine
+    container_name: php7
+    build: . #使用当前路径下的 Dockerfile 构造镜像
+    expose:
+      - "9000"
+    volumes:
+      - ./src/php.ini:/usr/local/etc/php/php.ini
+      - ./web:/var/www/html
+    environment:
+      - TZ=Asia/Shanghai
+    restart: always
