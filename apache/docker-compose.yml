@@ -9,11 +9,11 @@ services:
     volumes:
       - ./web:/var/www/html
     links:
-      - mysql
+      - mysql5.5
     environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
     restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
-  mysql:
+  mysql5.5:
     image: mysql:5.5 #拉取mysql:5.5
     container_name: mysql
     ports:

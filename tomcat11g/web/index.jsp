@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*,java.io.*" %>
 <%
 String driver = "oracle.jdbc.driver.OracleDriver";
-String url = "jdbc:oracle:thin:@oracle:1521:xe";
+String url = "jdbc:oracle:thin:@oracle11g:1521:xe";
 Connection conn = null;
 Statement pstm = null;
 ResultSet rs = null;

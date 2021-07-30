@@ -1,21 +1,22 @@
 version: '3'
 services:
-  tomcat:
-    image: ubuntu:tomcat
-    container_name: tomcat
+  tomcat8.5:
+    image: tomcat:8.5-jdk8-corretto
+    container_name: tomcat8.5
     build: .
     ports:
       - "8888:8080"
     volumes:
-      - ./web:/opt/apache-tomcat-8.0.53/webapps/ROOT
+      - ./src/ojdbc6.jar:/usr/local/tomcat/lib/ojdbc6.jar
+      - ./web:/usr/local/tomcat/webapps/ROOT
     links:
-      - oracle
+      - oracle11g
     restart: always
     environment:
       - TZ=Asia/Shanghai #设定时区
-  oracle:
+  oracle11g:
     image: wnameless/oracle-xe-11g-r2
-    container_name: oracle
+    container_name: oracle11g
     ports:
       - "1521:1521"
       - "8080:8080"
