@@ -1,12 +1,10 @@
 # docker env
 
 ### apache
-环境：apache+mysql+php
+环境：apache+mysql+php7
 
-apache端口：81
-mysql端口：3307
-
-用户名密码：root/root
+apache 端口：81
+mysql 端口：3307
 
 测试注入：[http://127.0.0.1:81/index.php?id=1](http://127.0.0.1:81/index.php?id=1)
 
@@ -14,14 +12,14 @@ mysql端口：3307
 
 环境：nginx+php
 
-nginx端口：82
+nginx 端口：82
 
 ### tomcat
-环境：tomcat+oracle+jsp
+环境：tomcat+oracle11g+jsp
 
-tomcat端口：8888
-oracle服务端口：1521
-oracle的web端口：8080
+tomcat 端口：83
+oracle 服务端口：1521
+oracle 的 web 端口：84
 
 sid：xe
 用户名密码：system/oracle
