@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `rtest`;
-use `rtest`;
+CREATE DATABASE IF NOT EXISTS `test_db`;
+use `test_db`;
 
 create table msg(
     id int not null primary key,
