@@ -7,6 +7,7 @@ services:
       - "81:80"
     volumes:
       - ./src/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./web:/usr/local/apache2/htdocs
     environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
     restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
