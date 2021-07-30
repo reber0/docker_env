@@ -1,5 +1,5 @@
 <?php
-    $conn = mysqli_connect("mysql5.5", "root", "root", "rtest");
+    $conn = mysqli_connect("mysql5.5", "root", "root", "test_db");
     if(!$conn)
         die('Could not connect: ' . mysqli_error($conn));
 
