@@ -1,7 +1,7 @@
 <?php
     $conn = mysqli_connect("mysql5.5", "root", "root", "rtest");
     if(!$conn)
-        die('Could not connect: ' . mysqli_error());
+        die('Could not connect: ' . mysqli_error($conn));
 
     if (isset($_GET['id'])) {
         $id = $_GET['id'];

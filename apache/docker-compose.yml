@@ -7,28 +7,15 @@ services:
       - "81:80"
     volumes:
       - ./src/httpd.conf:/usr/local/apache2/conf/httpd.conf
-    links:
-      - mysql
-      - php
     environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
     restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
-  mysql:
-    image: mysql:5.5 #拉取 mysql:5.5
-    container_name: mysql5.5
-    ports:
-      - "3307:3306"
-    volumes:
-      - ./mysql:/var/lib/mysql
-      - ./src/my.cnf:/etc/mysql/my.cnf
-      - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root #mysql 密码为 root
-      - TZ=Asia/Shanghai
+    networks:
+      - front
   php:
-    image: php:7.4.22-fpm-alpine #镜像名为 php，tag 为 7.4.22-fpm-alpine
-    container_name: php7
     build: . #使用当前路径下的 Dockerfile 构造镜像
+    image: php:7.4.22-fpm-alpine #Dockerfile 生成的镜像名为 php，tag 为 7.4.22-fpm-alpine
+    container_name: php7
     expose:
       - "9000"
     volumes:
@@ -37,3 +24,25 @@ services:
     environment:
       - TZ=Asia/Shanghai
     restart: always
+    networks: #php 位于网络 front 和 backend 中，做能能和 web 和 mysql 通信
+      - front
+      - backend
+  mysql:
+    image: mysql:5.5
+    container_name: mysql5.5
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./src/my.cnf:/etc/mysql/my.cnf
+      - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root #设置 mysql 密码为 root
+      - TZ=Asia/Shanghai
+    networks:
+      - backend
+networks:
+  front: #网络 front，web 和 php 都位于 front，可以相互通信
+    driver: bridge
+  backend: #网络 backend，php 和 mysql 都位于 backend，可以相互通信
+    driver: bridge
