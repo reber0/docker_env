@@ -1,8 +1,9 @@
 version: '3'
 services:
-  web:
+  httpd:
     image: httpd:2.4-alpine #拉取镜像名为 httpd，tag 为 2.4-alpine 的镜像
     container_name: apache2 #运行后生成的容器名字为 apache2
+    restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
     ports:
       - "81:80"
     volumes:
@@ -10,13 +11,13 @@ services:
       - ./web:/usr/local/apache2/htdocs
     environment: #设置环境变量
       - TZ=Asia/Shanghai #设定时区
-    restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
     networks:
       - front
   php:
     build: . #使用当前路径下的 Dockerfile 构造镜像
     image: php:7.4.22-fpm-alpine #Dockerfile 生成的镜像名为 php，tag 为 7.4.22-fpm-alpine
     container_name: php7
+    restart: always
     expose:
       - "9000"
     volumes:
@@ -24,13 +25,13 @@ services:
       - ./web:/var/www/html
     environment:
       - TZ=Asia/Shanghai
-    restart: always
     networks: #php 位于网络 front 和 backend 中，做能能和 web 和 mysql 通信
       - front
       - backend
   mysql:
     image: mysql:5.5
     container_name: mysql5.5
+    restart: always
     ports:
       - "3307:3306"
     volumes:
