@@ -1,5 +1,11 @@
 <?php
-    $conn = mysqli_connect("mysql5.5", "root", "root", "test_db");
+/*
+ * @Author: reber
+ * @Mail: reber0ask@qq.com
+ * @Date: 2021-03-16 11:24:33
+ * @LastEditTime: 2022-01-14 18:09:15
+ */
+    $conn = mysqli_connect("mysql", "root", "root", "test_db");
     if(!$conn)
         die('Could not connect: ' . mysqli_error($conn));
 

@@ -1,0 +1,50 @@
+version: '3'
+services:
+  httpd:
+    image: httpd:2.4-alpine #拉取镜像名为 httpd，tag 为 2.4-alpine 的镜像
+    container_name: apache2-mysql #运行后生成的容器名字为 apache2-mysql
+    restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
+    ports:
+      - "81:80"
+    volumes:
+      - ./src/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./web:/usr/local/apache2/htdocs
+    environment: #设置环境变量
+      - TZ=Asia/Shanghai #设定时区
+    networks:
+      - front
+  php:
+    build: . #使用当前路径下的 Dockerfile 构造镜像
+    image: php7:mysqli #Dockerfile 生成的镜像名为 php，tag 为 mysqli
+    container_name: php7-mysqli
+    restart: always
+    expose:
+      - "9000"
+    volumes:
+      - ./src/php.ini:/usr/local/etc/php/php.ini
+      - ./web:/var/www/html
+    environment:
+      - TZ=Asia/Shanghai
+    networks: #php 位于网络 front 和 backend 中，做能能和 web 和 mysql 通信
+      - front
+      - backend
+  mysql:
+    image: mysql:5.5
+    container_name: mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+      - ./src/my.cnf:/etc/mysql/my.cnf
+      - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root #设置 mysql 密码为 root
+      - TZ=Asia/Shanghai
+    networks:
+      - backend
+networks:
+  front: #网络 front，web 和 php 都位于 front，可以相互通信
+    driver: bridge
+  backend: #网络 backend，php 和 mysql 都位于 backend，可以相互通信
+    driver: bridge

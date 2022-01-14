@@ -1,21 +1,34 @@
+<!--
+ * @Author: reber
+ * @Mail: reber0ask@qq.com
+ * @Date: 2021-03-16 11:24:33
+ * @LastEditTime: 2022-01-14 18:22:05
+-->
 # docker env
 
-### apache
+### lamp
 环境：Apache+MySQL+PHP7
 
 Apache 端口：81
 
 MySQL 端口：3307
 
+MySQL 用户名密码 root/root
+
 测试注入：[http://127.0.0.1:81/index.php?id=1](http://127.0.0.1:81/index.php?id=1)
 
-### nginx
+### lapp
+环境：Apache+PostgreSQL+PHP7
 
-环境：Nginx
+Apache 端口：82
 
-nginx 端口：82
+PostgreSQL 端口 54321
 
-### tomcat
+PostgreSQL 用户名密码 root/123456
+
+测试注入：[http://127.0.0.1:82/index.php?id=1](http://127.0.0.1:82/index.php?id=1)
+
+### ltoj
 环境：Tomcat+Oracle11g+jsp
 
 Tomcat 端口：83
@@ -30,4 +43,12 @@ Oracle 用户名密码：system/oracle
 
 Oracle 用户名密码：utest/ptest
 
-测试注入：[http://127.0.0.1:8888/index.jsp?id=1](http://127.0.0.1:8888/index.jsp?id=1)
+测试注入：[http://127.0.0.1:83/index.jsp?id=1](http://127.0.0.1:83/index.jsp?id=1)
+
+### nginx
+
+环境：Nginx
+
+nginx 端口：84
+
+测试注入：[http://127.0.0.1:84/index.html](http://127.0.0.1:84/index.html)

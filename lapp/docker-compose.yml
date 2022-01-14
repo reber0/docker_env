@@ -2,10 +2,10 @@ version: '3'
 services:
   httpd:
     image: httpd:2.4-alpine #拉取镜像名为 httpd，tag 为 2.4-alpine 的镜像
-    container_name: apache2 #运行后生成的容器名字为 apache2
+    container_name: apache2-postgre #运行后生成的容器名字为 apache2-postgre
     restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
     ports:
-      - "81:80"
+      - "82:80"
     volumes:
       - ./src/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./web:/usr/local/apache2/htdocs
@@ -15,8 +15,8 @@ services:
       - front
   php:
     build: . #使用当前路径下的 Dockerfile 构造镜像
-    image: php:7.4.22-fpm-alpine #Dockerfile 生成的镜像名为 php，tag 为 7.4.22-fpm-alpine
-    container_name: php7
+    image: php7:pgsql #Dockerfile 生成的镜像名为 php，tag 为 pgsql
+    container_name: php7-pgsql
     restart: always
     expose:
       - "9000"
@@ -28,18 +28,19 @@ services:
     networks: #php 位于网络 front 和 backend 中，做能能和 web 和 mysql 通信
       - front
       - backend
-  mysql:
-    image: mysql:5.5
-    container_name: mysql5.5
+  postgre:
+    image: bitnami/postgresql:latest
+    container_name: postgre
     restart: always
     ports:
-      - "3307:3306"
+      - "54321:5432"
     volumes:
-      - ./mysql:/var/lib/mysql
-      - ./src/my.cnf:/etc/mysql/my.cnf
-      - ./src/sql.sql:/docker-entrypoint-initdb.d/sql.sql
+      - ./postgresql_data:/bitnami/postgresql
+      - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - MYSQL_ROOT_PASSWORD=root #设置 mysql 密码为 root
+      - POSTGRESQL_USERNAME=root #设置密码为 root
+      - POSTGRESQL_PASSWORD=123456
+      - POSTGRESQL_DATABASE=rtest
       - TZ=Asia/Shanghai
     networks:
       - backend
