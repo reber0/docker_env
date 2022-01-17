@@ -33,7 +33,7 @@ services:
     container_name: postgre
     restart: always
     ports:
-      - "54321:5432"
+      - "5432:5432"
     volumes:
       - ./postgresql_data:/bitnami/postgresql
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql

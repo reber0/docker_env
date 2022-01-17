@@ -2,7 +2,7 @@
  * @Author: reber
  * @Mail: reber0ask@qq.com
  * @Date: 2021-03-16 11:24:33
- * @LastEditTime: 2022-01-14 18:22:05
+ * @LastEditTime: 2022-01-17 14:49:12
 -->
 # docker env
 
@@ -22,7 +22,7 @@ MySQL 用户名密码 root/root
 
 Apache 端口：82
 
-PostgreSQL 端口 54321
+PostgreSQL 端口 5432
 
 PostgreSQL 用户名密码 root/123456
 
