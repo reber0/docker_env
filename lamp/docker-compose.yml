@@ -3,9 +3,9 @@ services:
   httpd:
     image: httpd:2.4-alpine #拉取镜像名为 httpd，tag 为 2.4-alpine 的镜像
     container_name: apache2-mysql #运行后生成的容器名字为 apache2-mysql
-    restart: always #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
+    restart: no #容器重启策略：always 当 docker 重启后容器总随着自动重启
     ports:
-      - "81:80"
+      - "80:80"
     volumes:
       - ./src/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./web:/usr/local/apache2/htdocs
@@ -17,7 +17,7 @@ services:
     build: . #使用当前路径下的 Dockerfile 构造镜像
     image: php7:mysqli #Dockerfile 生成的镜像名为 php，tag 为 mysqli
     container_name: php7-mysqli
-    restart: always
+    restart: no
     expose:
       - "9000"
     volumes:
@@ -31,7 +31,7 @@ services:
   mysql:
     image: mysql:5.5
     container_name: mysql
-    restart: always
+    restart: no
     ports:
       - "3306:3306"
     volumes:

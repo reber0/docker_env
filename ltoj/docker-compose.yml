@@ -10,10 +10,10 @@ services:
       - ./web:/usr/local/tomcat/webapps/ROOT
     links:
       - oracle11g
-    restart: always
+    restart: no
     environment:
       - TZ=Asia/Shanghai #设定时区
-  oracle:
+  oracle11g:
     image: wnameless/oracle-xe-11g-r2
     container_name: oracle11g
     ports:
@@ -22,6 +22,6 @@ services:
     volumes:
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
     working_dir: /u01/app/oracle
-    restart: always
+    restart: no
     environment:
       - TZ=Asia/Shanghai
