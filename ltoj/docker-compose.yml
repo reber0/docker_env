@@ -10,7 +10,7 @@ services:
       - ./web:/usr/local/tomcat/webapps/ROOT
     links:
       - oracle11g
-    restart: no
+    restart: "no"
     environment:
       - TZ=Asia/Shanghai #设定时区
   oracle11g:
@@ -22,6 +22,6 @@ services:
     volumes:
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
     working_dir: /u01/app/oracle
-    restart: no
+    restart: "no"
     environment:
       - TZ=Asia/Shanghai

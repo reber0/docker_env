@@ -3,7 +3,7 @@ services:
   httpd:
     image: httpd:2.4-alpine #拉取镜像名为 httpd，tag 为 2.4-alpine 的镜像
     container_name: apache2-postgre #运行后生成的容器名字为 apache2-postgre
-    restart: no #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
+    restart: "no" #容器重启策略：当容器终止退出后，总是重启容器中的服务，默认策略。
     ports:
       - "82:80"
     volumes:
@@ -17,7 +17,7 @@ services:
     build: . #使用当前路径下的 Dockerfile 构造镜像
     image: php7:pgsql #Dockerfile 生成的镜像名为 php，tag 为 pgsql
     container_name: php7-pgsql
-    restart: no
+    restart: "no"
     expose:
       - "9000"
     volumes:
@@ -31,7 +31,7 @@ services:
   postgre:
     image: bitnami/postgresql:latest
     container_name: postgre
-    restart: no
+    restart: "no"
     ports:
       - "5432:5432"
     volumes:
